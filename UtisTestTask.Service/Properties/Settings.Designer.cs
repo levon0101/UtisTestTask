@@ -31,5 +31,18 @@ namespace UtisTestTask.Service.Properties {
                 return ((int)(this["PortNumber"]));
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=.\\\\sqlexpress; Initial Catalog=UtisTestTaskDb; Integrated Security=Tr" +
+            "ue")]
+        public string ConnectionString {
+            get {
+                return ((string)(this["ConnectionString"]));
+            }
+            set {
+                this["ConnectionString"] = value;
+            }
+        }
     }
 }

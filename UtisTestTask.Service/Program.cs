@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Autofac;
 using Grpc.Core;
+using UtisTestTask.DataAccess;
 using UtisTestTask.Service.Services;
+using UtisTestTask.Service.Startup;
 using UtisTestTask.ServiceContract;
 
 namespace UtisTestTask.Service
@@ -13,9 +16,12 @@ namespace UtisTestTask.Service
     {
         static void Main(string[] args)
         {
+            var container = new Bootstrapper().Bootstrap();
+            var workerService = container.Resolve<WorkerService>();
+
             Server server = new Server
             {
-                Services = { WrokerIntegration.BindService(new WorkerService()) },
+                Services = { WrokerIntegration.BindService(workerService)},
                 Ports = { new ServerPort("localhost", Properties.Settings.Default.PortNumber, ServerCredentials.Insecure) }
             };
             server.Start();

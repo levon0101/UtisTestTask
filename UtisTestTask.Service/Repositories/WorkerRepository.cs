@@ -22,33 +22,7 @@ namespace UtisTestTask.Service.Repositories
         {
             return await Context.Workers.Where(w => !w.IsDeleted).FirstOrDefaultAsync(w => w.Id == id);
         }
-
-        public async Task<Worker> AddOrUpdateWorker(Worker worker)
-        {
-            if (worker.Id == 0)
-            {
-                Add(worker);
-            }
-            else
-            {
-                var workerFromDb = await GetByIdAsync(worker.Id);
-
-                if (workerFromDb == null)
-                    return null;
-
-                workerFromDb.FirstName = worker.FirstName;
-                workerFromDb.LastName = worker.LastName;
-                workerFromDb.MiddleName = worker.MiddleName;
-                workerFromDb.Birthday = worker.Birthday;
-                workerFromDb.HaveChildren = worker.HaveChildren;
-                workerFromDb.Sex = worker.Sex;
-            }
-
-            //await SaveAsync();
-
-            return worker;
-        }
-
+        
         public async Task DeleteByWorkerId(long workerId)
         {
 
@@ -56,6 +30,7 @@ namespace UtisTestTask.Service.Repositories
 
             if (workerFromDb == null)
                 return;
+
             workerFromDb.IsDeleted = true;
         }
     }
