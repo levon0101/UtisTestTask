@@ -1,9 +1,12 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
+using Grpc.Core;
 using Prism.Commands;
 using Prism.Events;
 using UtisTestTask.Model;
+using UtisTestTask.ServiceContract;
 
 namespace UtisTestTask.Client.ViewModel
 {
@@ -40,19 +43,27 @@ namespace UtisTestTask.Client.ViewModel
         #endregion End Properties
 
 
-        private void OnDeleteCommandExecute(Worker obj)
+        private void OnDeleteCommandExecute(Worker worker)
         {
             throw new System.NotImplementedException();
         }
 
-        private void OnEditCommandExecute(Worker obj)
+        private void OnEditCommandExecute(Worker worker)
         {
             throw new System.NotImplementedException();
         }
 
         private void OnAddCommandExecute()
         {
-            throw new System.NotImplementedException();
+
+            Channel channel = new Channel("127.0.0.1:5555", ChannelCredentials.Insecure);
+            var client = new WrokerIntegration.WrokerIntegrationClient(channel);
+            //var replay = client.AddOrUpdateWorker(new WrokerMessage(){FirstName = "Levon"});
+            var replay = client.GetWorkerById(new WorkerIdMessage{Id = 1});
+            MessageBox.Show($"{replay.FirstName}");
+
+            channel.ShutdownAsync().Wait();
+            MessageBox.Show("End");
         }
     }
 }

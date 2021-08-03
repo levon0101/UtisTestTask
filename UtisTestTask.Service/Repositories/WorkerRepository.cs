@@ -7,7 +7,7 @@ using UtisTestTask.Model;
 
 namespace UtisTestTask.Service.Repositories
 {
-    public class WorkerRepository : GenericRepository<Worker, AppDbContext>
+    public class WorkerRepository : GenericRepository<Worker, AppDbContext> , IWorkerRepository
     {
         public WorkerRepository(AppDbContext dbContext) : base(dbContext)
         {

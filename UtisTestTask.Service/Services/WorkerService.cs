@@ -3,10 +3,10 @@ using Grpc.Core;
 using UtisTestTask.Model;
 using UtisTestTask.Service.Repositories;
 using UtisTestTask.ServiceContract;
-using Sex = UtisTestTask.ServiceContract.Sex;
 
 namespace UtisTestTask.Service.Services
 {
+    //todo add AutoMapper to map worker objects
     public class WorkerService : WrokerIntegration.WrokerIntegrationBase
     {
         private readonly IWorkerRepository _workerRepository;

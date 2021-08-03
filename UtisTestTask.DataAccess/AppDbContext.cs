@@ -18,7 +18,7 @@ namespace UtisTestTask.DataAccess
 
         public AppDbContext(string connectionString) : base(connectionString)
         {
-            Database.SetInitializer(new DbInitializer());
+            //Database.SetInitializer(new DbInitializer());
         }
 
         public DbSet<Worker> Workers { get; set; }

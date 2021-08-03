@@ -32,16 +32,13 @@ namespace UtisTestTask.Service.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=.\\\\sqlexpress; Initial Catalog=UtisTestTaskDb; Integrated Security=Tr" +
-            "ue")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=.\\sqlexpress; Initial Catalog=UtisTestTaskDb; Integrated Security=Tru" +
+            "e")]
         public string ConnectionString {
             get {
                 return ((string)(this["ConnectionString"]));
-            }
-            set {
-                this["ConnectionString"] = value;
             }
         }
     }

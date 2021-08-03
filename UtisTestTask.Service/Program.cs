@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Autofac;
 using Grpc.Core;
 using UtisTestTask.DataAccess;
+using UtisTestTask.Service.Repositories;
 using UtisTestTask.Service.Services;
 using UtisTestTask.Service.Startup;
 using UtisTestTask.ServiceContract;
@@ -17,7 +14,10 @@ namespace UtisTestTask.Service
         static void Main(string[] args)
         {
             var container = new Bootstrapper().Bootstrap();
-            var workerService = container.Resolve<WorkerService>();
+            var db = container.Resolve<AppDbContext>();
+            db.Database.CreateIfNotExists();
+
+            var workerService = container.Resolve<WorkerService>(); 
 
             Server server = new Server
             {
