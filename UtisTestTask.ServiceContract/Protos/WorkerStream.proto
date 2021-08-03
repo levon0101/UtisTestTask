@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+option csharp_namespace = "UtisTestTask.ServiceContract";
+
+service WrokerIntegration {
+	rpc GetWorkerStream (EmptyMessage) returns (stream WrokerMessage);
+	rpc GetWorkerById(WorkerIdMessage) returns ( WrokerMessage);
+	rpc DeleteWorkerById(WorkerIdMessage) returns ( WrokerMessage);
+	rpc AddOrUpdateWorker(WrokerMessage) returns ( WrokerMessage);
+}
+
+message EmptyMessage
+{
+}
+
+message WorkerIdMessage
+{
+	int64 Id = 1;
+}
+
+message WrokerMessage
+{
+	int64 Id = 1;
+	string LastName = 2;
+	string FirstName = 3;
+	string MiddleName = 4;
+	int64 Birthday = 5;
+	Sex Sex = 6;
+	bool HaveChildren = 7;
+}
+
+enum Sex {
+	Default = 0;
+	Male = 1;
+	Female = 2;
+}

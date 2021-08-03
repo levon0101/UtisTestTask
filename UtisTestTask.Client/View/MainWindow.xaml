@@ -3,14 +3,50 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:UtisTestTask.Client"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Utis App" Height="450" Width="800">
     <Grid>
-        <StackPanel>
+        <ListView ItemsSource="{Binding Workers}"
+                  materialDesign:ListViewAssist.ListViewItemPadding="25,10,10,5" >
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Id" 
+                                    DisplayMemberBinding="{Binding Path=Id}" />
+                    <GridViewColumn Header="Name"
+                                    DisplayMemberBinding="{Binding Path=Name}" />
+                    <GridViewColumn Header="Edit">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Command="{Binding Path=DataContext.EditCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"
+                                        CommandParameter="{Binding}"
+                                        Style="{StaticResource ContentActionButton}">
+                                    <materialDesign:PackIcon Kind="Edit"
+                                                             Foreground="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}},Path=Foreground}" />
 
+                                </Button>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Delete">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Command="{Binding Path=DataContext.DeleteCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"
+                                            CommandParameter="{Binding}"
+                                            Style="{StaticResource ContentActionButton}">
+                                    <materialDesign:PackIcon Kind="Remove"
+                                                                 Foreground="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}},Path=Foreground}" />
 
-        </StackPanel>
-        
+                                </Button>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <Button Command="{Binding AddCommand}"
+                Style="{StaticResource AddButtonStyle}"/>
+
     </Grid>
 </Window>
