@@ -13,15 +13,14 @@ namespace UtisTestTask.Service
     {
         static void Main(string[] args)
         {
-            const int port = 5555;
             Server server = new Server
             {
                 Services = { WrokerIntegration.BindService(new WorkerService()) },
-                Ports = { new ServerPort("localhost", port, ServerCredentials.Insecure) }
+                Ports = { new ServerPort("localhost", Properties.Settings.Default.PortNumber, ServerCredentials.Insecure) }
             };
             server.Start();
 
-            Console.WriteLine($"Worker Server Listening on port {port}");
+            Console.WriteLine($"Worker Server Listening on port {Properties.Settings.Default.PortNumber}");
             Console.WriteLine("Press Enter to exit");
             Console.ReadLine();
 

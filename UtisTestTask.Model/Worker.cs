@@ -18,7 +18,7 @@ namespace UtisTestTask.Model
 
         public bool HaveChildren { get; set; }
 
-        public bool IdDeleted { get; set; }
+        public bool IsDeleted { get; set; }
 
     }
 }
