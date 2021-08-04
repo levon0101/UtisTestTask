@@ -45,7 +45,7 @@ namespace UtisTestTask.Client.ViewModel
             get => (int)Worker.Sex;
             set
             {
-                Worker.Sex = (Model.Sex)value;
+                Worker.Sex = (Sex)value;
                 OnPropertyChanged();
             }
         }

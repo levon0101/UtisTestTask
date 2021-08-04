@@ -1,4 +1,7 @@
 ﻿using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -48,6 +51,8 @@ namespace UtisTestTask.Client.ViewModel
 
         public async Task LoadAsync()
         {
+            await LoadService();
+
             await UpdateWorkersList();
         }
 
@@ -105,6 +110,34 @@ namespace UtisTestTask.Client.ViewModel
             {
                 Workers.Add(worker);
             }
+        }
+
+        private async Task LoadService()
+        {
+            if (!IsProcessOpen(Properties.Settings.Default.ServiceName.TrimEnd(".exe".ToCharArray())))
+            {
+                var servicePath =
+                    Path.Combine(Directory.GetCurrentDirectory(), Properties.Settings.Default.ServiceName);
+                var processInfo = new ProcessStartInfo(servicePath);
+                processInfo.WindowStyle = ProcessWindowStyle.Minimized;
+
+                Process.Start(processInfo);
+
+                await Task.Delay(2000); // waiting for load service/
+            }
+        }
+
+        public bool IsProcessOpen(string name)
+        {
+            foreach (Process clsProcess in Process.GetProcesses())
+            { 
+                if (clsProcess.ProcessName.Contains(name))
+                { 
+                    return true;
+                }
+            } 
+
+            return false;
         }
     }
 }
