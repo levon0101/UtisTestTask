@@ -55,9 +55,15 @@ namespace UtisTestTask.Client.ViewModel
            }
         }
 
-        private void OnDeleteCommandExecute(Worker worker)
+        private async void OnDeleteCommandExecute(Worker worker)
         {
-            throw new System.NotImplementedException();
+            var deleted = await _workerRepository.DeleteWorker(worker.Id);
+
+            if (deleted)
+            {
+                MessageBox.Show($"Worker: {worker.Name} successfully deleted.");
+                Workers.Remove(worker);
+            }
         }
 
         private void OnEditCommandExecute(Worker worker)
@@ -68,14 +74,6 @@ namespace UtisTestTask.Client.ViewModel
         private void OnAddCommandExecute()
         {
 
-            //Channel channel = new Channel("127.0.0.1:5555", ChannelCredentials.Insecure);
-            //var client = new WrokerIntegration.WrokerIntegrationClient(channel);
-            ////var replay = client.AddOrUpdateWorker(new WrokerMessage(){FirstName = "Levon"});
-            //var replay = client.GetWorkerById(new WorkerIdMessage{Id = 1});
-            //MessageBox.Show($"{replay.FirstName}");
-
-            //channel.ShutdownAsync().Wait();
-            //MessageBox.Show("End");
         }
     }
 }

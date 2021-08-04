@@ -7,5 +7,6 @@ namespace UtisTestTask.Client.Repositories
     public interface IWorkerRepository
     {
         Task<IEnumerable<Worker>> AllWorkers();
+        Task<bool> DeleteWorker(long workerId);
     }
 }

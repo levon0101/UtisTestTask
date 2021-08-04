@@ -40,7 +40,7 @@ namespace UtisTestTask.Service.Services
         {
             var workersFromDb = await _workerRepository.GetByIdAsync(request.Id);
 
-            if (workersFromDb == null) return null;
+            if (workersFromDb == null) return new WrokerMessage();
 
             return new WrokerMessage
             {
@@ -89,7 +89,7 @@ namespace UtisTestTask.Service.Services
             await _workerRepository.DeleteByWorkerId(request.Id);
             await _workerRepository.SaveAsync();
 
-            return null;
+            return new WrokerMessage();
         }
     }
 }

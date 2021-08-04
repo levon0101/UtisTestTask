@@ -18,7 +18,7 @@
                     <GridViewColumn Header="Edit">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Command="{Binding Path=DataContext.EditCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"
+                                <Button Command="{Binding Path=DataContext.EditCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
                                         CommandParameter="{Binding}"
                                         Style="{StaticResource ContentActionButton}">
                                     <materialDesign:PackIcon Kind="Edit"
@@ -31,7 +31,7 @@
                     <GridViewColumn Header="Delete">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Command="{Binding Path=DataContext.DeleteCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"
+                                <Button Command="{Binding Path=DataContext.DeleteCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
                                             CommandParameter="{Binding}"
                                             Style="{StaticResource ContentActionButton}">
                                     <materialDesign:PackIcon Kind="Remove"

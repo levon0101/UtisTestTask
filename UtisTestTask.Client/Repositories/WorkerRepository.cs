@@ -44,10 +44,28 @@ namespace UtisTestTask.Client.Repositories
             catch (RpcException ex)
             {
                 MessageBox.Show($"Service error: {ex.Message}");
-                //TODO Log there cancel 
+                //TODO Log there  
             }
 
             return workers;
+        }
+
+        public async Task<bool> DeleteWorker(long workerId)
+        {
+            try
+            {
+                var result = await _client.DeleteWorkerByIdAsync(new WorkerIdMessage {Id = workerId});
+
+                if (result != null)
+                    return true;
+            }
+            catch (RpcException ex)
+            {
+                MessageBox.Show($"Service error: {ex.Message}");
+                //TODO Log there  
+            }
+
+            return false;
         }
     }
 }
