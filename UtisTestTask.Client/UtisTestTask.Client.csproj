@@ -124,6 +124,8 @@
     <Compile Include="Model\Sex.cs" />
     <Compile Include="Model\Worker.cs" />
     <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="Repositories\IWorkerRepository.cs" />
+    <Compile Include="Repositories\WorkerRepository.cs" />
     <Compile Include="Startup\Bootstrapper.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
@@ -165,6 +167,7 @@
       <Name>UtisTestTask.ServiceContract</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.4.2.0-ci2578\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.4.2.0-ci2578\build\MaterialDesignThemes.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

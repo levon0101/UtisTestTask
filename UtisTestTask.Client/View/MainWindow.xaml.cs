@@ -8,11 +8,20 @@ namespace UtisTestTask.Client.View
     /// </summary>
     public partial class MainWindow : Window
     {
+        private MainViewModel _mainViewModel;
+
         public MainWindow(MainViewModel dataContext)
         {
             InitializeComponent();
+            _mainViewModel = dataContext;
+            DataContext = _mainViewModel;
+            Loaded += MainWIndowLoadedExecute;
 
-            DataContext = dataContext;
+        }
+
+        private void MainWIndowLoadedExecute(object sender, RoutedEventArgs e)
+        {
+            _mainViewModel.Load();
         }
     }
 }
