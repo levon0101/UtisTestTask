@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows;
 using Grpc.Core;
@@ -66,6 +64,72 @@ namespace UtisTestTask.Client.Repositories
             }
 
             return false;
+        }
+
+        public async Task<Worker> GetWorkerById(long workerId)
+        {
+            try
+            {
+                var result = await _client.GetWorkerByIdAsync(new WorkerIdMessage { Id = workerId });
+
+                if (result.Id == 0)
+                    return null;
+
+                return new Worker
+                {
+                    Id = result.Id,
+                    Name = result.FirstName,
+                    Surname = result.LastName,
+                    Patronymic = result.MiddleName,
+                    HaveChildren = result.HaveChildren,
+                    Sex = (Model.Sex)(int)result.Sex
+                };
+            }
+            catch (RpcException ex)
+            {
+                MessageBox.Show($"Service error: {ex.Message}");
+                //TODO Log there  
+            }
+
+            return null;
+        }
+
+        public async Task<Worker> AddOrUpdateWorker(Worker worker)
+        {
+            try
+            {
+                var workerMsg = new WrokerMessage
+                {
+                    Id = worker.Id,
+                    FirstName = worker.Name ?? string.Empty,
+                    LastName = worker.Surname ?? string.Empty,
+                    MiddleName = worker.Patronymic ?? string.Empty,
+                    HaveChildren = worker.HaveChildren,
+                    Sex = (ServiceContract.Sex)(int)worker.Sex,
+                };
+
+                var result = await _client.AddOrUpdateWorkerAsync(workerMsg);
+
+                if (result.Id == 0)
+                    return null;
+
+                return new Worker
+                {
+                    Id = result.Id,
+                    Name = result.FirstName,
+                    Surname = result.LastName,
+                    Patronymic = result.MiddleName,
+                    HaveChildren = result.HaveChildren,
+                    Sex = (Model.Sex)(int)result.Sex
+                };
+            }
+            catch (RpcException ex)
+            {
+                MessageBox.Show($"Service error: {ex.Message}");
+                //TODO Log there  
+            }
+
+            return null;
         }
     }
 }

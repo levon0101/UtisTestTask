@@ -34,4 +34,19 @@
 
     </Style>
 
+    <!-- Buttons style in Dialogs -->
+    <Style x:Key="ConfirmationButton"
+           TargetType="{x:Type Button}"
+           BasedOn="{StaticResource MaterialDesignRaisedButton}">
+        <Setter Property="materialDesign:ButtonAssist.CornerRadius"
+                Value="5" />
+        <Setter Property="Height"
+                Value="48" />
+        <Setter Property="Width"
+                Value="140" />
+        <Setter Property="Opacity"
+                Value="1" />
+        <Setter Property="Margin"
+                Value="0,0,0,16" />
+    </Style>
 </ResourceDictionary>

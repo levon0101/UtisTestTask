@@ -15,13 +15,13 @@ namespace UtisTestTask.Client.View
             InitializeComponent();
             _mainViewModel = dataContext;
             DataContext = _mainViewModel;
-            Loaded += MainWIndowLoadedExecute;
+            Loaded += MainWindowLoadedExecute;
 
         }
 
-        private void MainWIndowLoadedExecute(object sender, RoutedEventArgs e)
+        private async void MainWindowLoadedExecute(object sender, RoutedEventArgs e)
         {
-            _mainViewModel.Load();
+            await _mainViewModel.LoadAsync();
         }
     }
 }
